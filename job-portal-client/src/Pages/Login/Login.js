@@ -1,33 +1,33 @@
-import React from 'react';
+import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import useStyles from '../../../Styles/Styles';
-
+import useStyles from '../../Styles/Styles';
 
 const theme = createTheme();
 
-const SingUp = () => {
-    const classes = useStyles();
+const Login = () => {
+  const classes = useStyles(); 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get("email"),
-          password: data.get("password"),
-        });
-      };
-    return (
-        <ThemeProvider theme={theme}>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -40,10 +40,10 @@ const SingUp = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-            <HowToRegIcon />
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registration
+            Sign in
           </Typography>
           <Box
             component="form"
@@ -77,12 +77,12 @@ const SingUp = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Registration
+              Sign In
             </Button>
             <Grid container className={classes.signupTxt}>
               <Grid item>
-                <Link to="/login" variant="body2">
-                   <p>Already have an account? Sign In</p> 
+                <Link to="/signup" variant="body2">
+                   <p>Don't have an account? Registration</p> 
                 </Link>
               </Grid>
             </Grid>
@@ -90,7 +90,7 @@ const SingUp = () => {
         </Box>
       </Container>
     </ThemeProvider>
-    );
+  );
 };
 
-export default SingUp;
+export default Login;

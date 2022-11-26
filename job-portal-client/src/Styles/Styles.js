@@ -50,6 +50,15 @@ const useStyles = makeStyles((theme) => ({
             color: "#1976D2",
             textDecoration: "none",
         }
+    },
+    error: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    errorImg: {
+        width: "40%",
+        padding: "10px",
     }
 }));
 
