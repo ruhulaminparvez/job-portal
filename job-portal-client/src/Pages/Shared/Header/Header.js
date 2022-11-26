@@ -17,7 +17,7 @@ const Header = () => {
     <CssBaseline>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className={classes.footerNav}>
             <Link to="/">
               <IconButton
                 size="large"
@@ -25,13 +25,13 @@ const Header = () => {
                 color="inherit"
                 aria-label="logo"
               >
-                <img style={{ width: "50px" }} src={logo} alt="" />
+                <img className={classes.imgLogo} src={logo} alt="" />
               </IconButton>
             </Link>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className={classes.title}>
               <Link to="/">Job Portal</Link>
             </Typography>
-            <Link to="/login" style={{ color: "white" }} className={classes.loginBtn}>
+            <Link to="/login" className={classes.loginBtn}>
               <Button color="inherit">Login</Button>
             </Link>
           </Toolbar>
