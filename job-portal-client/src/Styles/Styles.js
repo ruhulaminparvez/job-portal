@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
     errorImg: {
         width: "40%",
         padding: "10px",
+    },
+    MakePost: {
+        padding: "40px",
     }
 }));
 

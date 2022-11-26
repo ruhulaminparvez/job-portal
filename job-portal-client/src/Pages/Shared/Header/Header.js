@@ -43,7 +43,7 @@ const Header = () => {
             {
               user?.uid ? 
               <div>
-                <Link to="/" className={classes.loginBtn}>
+                <Link to="/create-post" className={classes.loginBtn}>
                   <Button color="inherit">Create Job Post</Button>
                 </Link>
                 <Link to="/" className={classes.loginBtn}>
