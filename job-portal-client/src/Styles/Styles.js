@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#1976D2",
         color: "white",
         textAlign: "center",
-        padding: "20px",
+        padding: "30px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.40)",
         "& img": {
             width: "50px",
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rights: {
         marginTop: "5px",
-        fontSize: "12px !important" ,
+        fontSize: "14px !important" ,
     },
     signupTxt: {
         display: "flex",
