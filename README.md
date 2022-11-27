@@ -3,14 +3,15 @@
 Job Portal using React, React Router DOM, Material UI, MongoDB, Express, Node.js, and JWT.
 
 ## Live Preview
-[Job Portal](https://jobz-portal.netlify.app/)
+[Job Portal Netlify Deployed Link](https://jobz-portal.netlify.app/)
+[Job Portal Firebase Deployed Link](https://job-portal-c7485.web.app/)
 
 ## Installation
 ### Client Side
 
 1. Clone the repository
 2. Run ```cd job-portal-client``` to go into the client directory
-3. Setup the environment variables in the .env.example file (rename the file to .env.local)
+3. Setup the environment variables in the example.env file (rename the file to .env.local)
 4. Run ```npm install``` in the root directory to install all the dependencies
 5. Run ```npm install --force``` if you get any errors
 6. Run ```npm start``` to start the client
