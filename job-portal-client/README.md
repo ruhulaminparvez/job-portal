@@ -2,7 +2,7 @@
 Job Portal using React, React Router DOM, Material UI, MongoDB, Express, Node.js, and JWT.
 
 ## Live Preview
-[Job Portal Netlify Deployed Link](https://jobz-portal.netlify.app/)
+[Job Portal Netlify Deployed Link](https://jobz-portal.netlify.app/) <br>
 [Job Portal Firebase Deployed Link](https://job-portal-c7485.web.app/)
 
 ## Installation
