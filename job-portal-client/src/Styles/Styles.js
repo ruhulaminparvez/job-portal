@@ -65,7 +65,13 @@ const useStyles = makeStyles((theme) => ({
     },
     MakePostCard: {
         padding: "50px",
-    }
+    },
+    viewPost: {
+        padding: "40px",
+    },
+    viewPostCard: {
+        marginBottom: "30px",
+    },
 }));
 
 export default useStyles;
