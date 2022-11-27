@@ -48,7 +48,7 @@ const Header = () => {
                 <Link to="/create-post" className={classes.loginBtn}>
                   <Button color="inherit">Create Job Post</Button>
                 </Link>
-                <Link to="/" className={classes.loginBtn}>
+                <Link to="/view-post" className={classes.loginBtn}>
                   <Button color="inherit">View Job Posts</Button>
                 </Link>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>

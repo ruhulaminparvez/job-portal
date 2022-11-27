@@ -4,6 +4,7 @@ import useStyles from "../../../Styles/Styles";
 import { useState, useEffect } from 'react';
 import ViewPostCard from './ViewPostCard';
 
+
 const ViewPost = () => {
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
@@ -21,7 +22,7 @@ const ViewPost = () => {
                     <Typography className={classes.viewPostCard} variant="h3" align="center" gutterBottom>
                         View Posts
                     </Typography>
-                    
+                       
                 </Grid>
             </Grid>
             <Grid container spacing={2}>

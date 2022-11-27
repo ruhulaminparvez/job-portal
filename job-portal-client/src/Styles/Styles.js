@@ -72,6 +72,27 @@ const useStyles = makeStyles((theme) => ({
     viewPostCard: {
         marginBottom: "30px",
     },
+    singlePost: {
+        padding: "30px",
+    },
+    desc: {
+        marginLeft: "30px",
+        padding: "10px",
+    },
+    viewBtn: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "20px",
+    },
+    homeImg: {
+        width: "40%",
+    },
+    homeDiv: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    }
 }));
 
 export default useStyles;
