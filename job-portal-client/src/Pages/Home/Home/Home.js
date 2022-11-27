@@ -1,9 +1,10 @@
 import React from 'react';
+import ViewPost from './../ViewPost/ViewPost';
 
 const Home = () => {
     return (
         <div>
-            Home
+            <ViewPost />
         </div>
     );
 };

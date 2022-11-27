@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,12 @@ import useStyles from "../../../Styles/Styles";
 
 const CreatePost = () => {
   const classes = useStyles();
+  const [createdPost, setCreatedPost] = useState({});
+
+  const current = new Date();
+  const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,22 +22,41 @@ const CreatePost = () => {
     const postName = e.target.postName.value;
     const companyName = e.target.companyName.value;
     const numberOfVacancy = e.target.numberOfVacancy.value;
+    const currentDate = e.target.currentDate.value;
+    const lastApplyDate = e.target.lastApplyDate.value;
     const jobDescription = e.target.jobDescription.value;
     const jobRequirements = e.target.jobRequirements.value;
     const jobBenefits = e.target.jobBenefits.value;
     const howToApply = e.target.howToApply.value;
 
-    const post = {
+    const createdPost = {
       postName,
       companyName,
       numberOfVacancy,
+      currentDate,
+      lastApplyDate,
       jobDescription,
       jobRequirements,
       jobBenefits,
       howToApply
     }
+    setCreatedPost(createdPost);
+    console.log(createdPost);
 
-    console.log(post);
+    fetch("http://localhost:5000/createPost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(createdPost),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if(data.acknowledged){
+          alert("Post Created Successfully!");
+        }
+      });
 
     e.target.reset();
   };
@@ -40,7 +65,7 @@ const CreatePost = () => {
     <React.Fragment>
       <div className={classes.MakePost}>
         <Card className={classes.MakePostCard}>
-          <Typography mb={5} variant="h6" align="center" gutterBottom>
+          <Typography mb={5} variant="h3" align="center" gutterBottom>
             Create Job Post
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -73,6 +98,32 @@ const CreatePost = () => {
                   label="Number of vacancy"
                   fullWidth
                   autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="currentDate"
+                  name="currentDate"
+                  label="Post Created Date"
+                  fullWidth
+                  autoComplete="given-name"
+                  value={date}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="lastApplyDate"
+                  name="lastApplyDate"
+                  label="Last Apply Date"
+                  fullWidth
+                  autoComplete="given-name"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>

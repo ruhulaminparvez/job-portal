@@ -27,6 +27,12 @@ async function run() {
             res.send(result);
         });
         
+        app.get('/posts', async (req, res) => {
+            const cursor = collection.find({});
+            const posts = await cursor.toArray();
+            res.send(posts);
+        });
+
     } finally {
         // Ensures that the client will close when you finish/error
     }
