@@ -5,10 +5,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const classes = useStyles();
   const [createdPost, setCreatedPost] = useState({});
+
+  const navigate = useNavigate();
 
   const current = new Date();
   const date = `${current.getFullYear()}-${
@@ -55,6 +58,7 @@ const CreatePost = () => {
         if (data.acknowledged) {
           alert("Post Created Successfully!");
         }
+        navigate("/view-post", { replace: true });
       });
 
     e.target.reset();

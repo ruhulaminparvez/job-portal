@@ -6,12 +6,14 @@ import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
 import { useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePost = () => {
   const classes = useStyles();
   const [updatedPost, setUpdatedPost] = useState({});
   const loadPost = useLoaderData();
 
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +56,7 @@ const UpdatePost = () => {
             if (data.acknowledged) {
                 alert("Post Updated Successfully!");
             }
+            navigate("/view-post", { replace: true });
         });
   };
 

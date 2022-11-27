@@ -9,7 +9,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useStyles from '../../Styles/Styles';
 import { AuthContext } from '../../contexts/AuthProvider';
 
@@ -19,6 +19,8 @@ const theme = createTheme();
 const SingUp = () => {
     const classes = useStyles();
     const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,9 +38,11 @@ const SingUp = () => {
                 if(user){
                   alert('User Created Successfully');
                 }
+                navigate('/', {replace: true});
             })
             .catch((error) => {
                 console.log(error);
+                alert(error.message);
             });
       };
     return (

@@ -9,7 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useStyles from '../../Styles/Styles';
 import { AuthContext } from "../../contexts/AuthProvider";
 
@@ -18,6 +18,10 @@ const theme = createTheme();
 const Login = () => {
   const classes = useStyles(); 
   const {signInUser} = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,9 +39,11 @@ const Login = () => {
         if(user){
           alert('User Logged In Successfully');
         }
+        navigate(from, {replace: true});
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
    
   };
