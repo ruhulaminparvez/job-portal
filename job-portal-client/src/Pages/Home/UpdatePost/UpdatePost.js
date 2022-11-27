@@ -7,6 +7,7 @@ import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
 import { useLoaderData } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const UpdatePost = () => {
   const classes = useStyles();
@@ -54,7 +55,7 @@ const UpdatePost = () => {
         .then((data) => {
             console.log(data);
             if (data.acknowledged) {
-                alert("Post Updated Successfully!");
+                toast("Post Updated Successfully!");
             }
             navigate("/view-post", { replace: true });
         });

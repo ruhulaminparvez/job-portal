@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const CreatePost = () => {
   const classes = useStyles();
@@ -56,11 +57,11 @@ const CreatePost = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          alert("Post Created Successfully!");
+          toast("Post Created Successfully!");
         }
         navigate("/view-post", { replace: true });
       });
-
+    
     e.target.reset();
   };
 

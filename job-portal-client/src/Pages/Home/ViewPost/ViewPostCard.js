@@ -8,6 +8,8 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 
 const ViewPostCard = ({post}) => {
     const classes = useStyles();
@@ -26,7 +28,7 @@ const ViewPostCard = ({post}) => {
             .then(res => res.json())
             .then(result => {
                 if(result.deletedCount > 0){
-                    alert('Post deleted successfully');
+                    toast('Post deleted successfully');
                     // display remaining post
                     const remainingPost = remainPost.filter(remain => remain._id !== post._id);
                     setRemainPost(remainingPost);

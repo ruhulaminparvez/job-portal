@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import useStyles from '../../Styles/Styles';
 import { AuthContext } from "../../contexts/AuthProvider";
+import toast from 'react-hot-toast';
 
 const theme = createTheme();
 
@@ -37,13 +38,32 @@ const Login = () => {
         console.log(result);
         const user = result.user;
         if(user){
-          alert('User Logged In Successfully');
+          toast('User Logged In Successfully');
         }
-        navigate(from, {replace: true});
+
+        const currentUser = {
+          email: user.email
+        }
+
+        //get token
+        fetch('http://localhost:5000/jwt', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(currentUser)
+        })
+        .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // local storage is the easiest but not the best place to store jwt token
+                        localStorage.setItem('job-token', data.token);
+                        navigate(from, { replace: true });
+                    });
       })
       .catch((error) => {
         console.log(error);
-        alert(error.message);
+        toast(error.message);
       });
    
   };

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import useStyles from '../../../Styles/Styles';
 import { AuthContext } from "../../../contexts/AuthProvider";
+import toast from 'react-hot-toast';
 
 const Header = () => {
   const classes = useStyles(); 
@@ -18,9 +19,7 @@ const Header = () => {
   const handleLogout = () => {
     logOutUser().then(() => {
       console.log("User Log Out");
-      alert("User Log Out");
-      // redirect to login page
-      
+      toast("User Log Out");      
     });
   };
 

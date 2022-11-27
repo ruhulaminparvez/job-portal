@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Grid } from '@mui/material';
 import useStyles from "../../../Styles/Styles";
 import { useState, useEffect } from 'react';
 import ViewPostCard from './ViewPostCard';
+import { AuthContext } from './../../../contexts/AuthProvider';
 
 
 const ViewPost = () => {
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
+    const {user, logOut } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/posts')
-            .then(res => res.json())
+        fetch('http://localhost:5000/posts', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('job-token')}`
+            }
+        })
+            .then(res =>  res.json())
             .then(data => setPosts(data))
-    }, []);
+    }, [user?.email, logOut]);
 
     return (
         <div className={classes.viewPost}>
@@ -27,7 +33,7 @@ const ViewPost = () => {
             </Grid>
             <Grid container spacing={2}>
                {
-                    posts.map(post => <ViewPostCard key={post._id} post={post}></ViewPostCard>)
+                  posts && posts.map(post => <ViewPostCard key={post._id} post={post}></ViewPostCard>)
                }
             </Grid>
             

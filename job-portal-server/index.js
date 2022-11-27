@@ -3,6 +3,7 @@ const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 const port = process.env.PORT || 5000;
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
@@ -15,11 +16,35 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 console.log(uri);
 
+function verifyJWT(req, res, next) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).send({ message: 'unauthorized access' });
+    }
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
+        if (err) {
+            return res.status(403).send({ message: 'Forbidden access' });
+        }
+        req.decoded = decoded;
+        next();
+    })
+}
+
 async function run() {
     try {
         console.log('Connected correctly to server');
         const db = client.db('jobPortal');
         const collection = db.collection('jobPosts');
+
+        // jwt
+        app.post('/jwt', (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' })
+            res.send({ token })
+        })
         
         // create a document to be inserted
         app.post('/createPost', async (req, res) => {
@@ -29,12 +54,12 @@ async function run() {
         });
         
         // get all posts
-        app.get('/posts', async (req, res) => {
+        app.get('/posts', verifyJWT, async (req, res) => {
             const cursor = collection.find({});
             const posts = await cursor.toArray();
             res.send(posts);
         });
-
+        
         // get a single post
         app.get('/post/:id', async (req, res) => {
             const id = req.params.id;

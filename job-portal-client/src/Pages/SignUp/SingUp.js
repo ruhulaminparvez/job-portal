@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import useStyles from '../../Styles/Styles';
 import { AuthContext } from '../../contexts/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const theme = createTheme();
@@ -36,13 +37,13 @@ const SingUp = () => {
                 console.log(result);
                 const user = result.user;
                 if(user){
-                  alert('User Created Successfully');
+                  toast('User Created Successfully');
                 }
                 navigate('/', {replace: true});
             })
             .catch((error) => {
                 console.log(error);
-                alert(error.message);
+                toast(error.message);
             });
       };
     return (
