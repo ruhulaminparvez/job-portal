@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: "/update-post/:id",
                 element: <PrivateRoute><UpdatePost /></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/post/${params.id}`)
+                loader: ({params}) => fetch(`https://job-portal-weld.vercel.app/post/${params.id}`)
             },
             {
                 path: "*",

@@ -46,7 +46,7 @@ const CreatePost = () => {
     setCreatedPost(createdPost);
     console.log(createdPost);
 
-    fetch("http://localhost:5000/createPost", {
+    fetch("https://job-portal-weld.vercel.app/createPost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

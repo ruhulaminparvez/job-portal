@@ -12,7 +12,7 @@ const ViewPost = () => {
     const {user, logOut } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/posts', {
+        fetch('https://job-portal-weld.vercel.app/posts', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('job-token')}`
             }
