@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Typography, Grid } from '@mui/material';
 import { CardActionArea } from '@mui/material';
 import { CardContent } from '@mui/material';
@@ -7,12 +7,33 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 
 const ViewPostCard = ({post}) => {
     const classes = useStyles();
+    const [remainPost, setRemainPost] = useState([]);
 
-    const {postName, companyName, numberOfVacancy, currentDate, lastApplyDate, jobDescription, jobRequirements, jobBenefits, 
+    const {_id ,postName, companyName, numberOfVacancy, currentDate, lastApplyDate, jobDescription, jobRequirements, jobBenefits, 
         howToApply } = post;
+
+
+    const handleDelete = (post) => {
+        const deletePost = window.confirm(`Are you sure you want to delete this post? ${post.postName}`);
+        if(deletePost){
+            fetch(`http://localhost:5000/deletePost/${post._id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(result => {
+                if(result.deletedCount > 0){
+                    alert('Post deleted successfully');
+                    // display remaining post
+                    const remainingPost = remainPost.filter(remain => remain._id !== post._id);
+                    setRemainPost(remainingPost);
+                }
+            })
+        }
+    }
 
     
     return (
@@ -42,8 +63,10 @@ const ViewPostCard = ({post}) => {
                             <b>How Can Apply:</b> {howToApply}
                         </Typography>
                         <Stack spacing={2} direction="row" className={classes.viewBtn}>
-                            <Button variant="contained" startIcon={<EditIcon/>}>Edit</Button>
-                            <Button variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
+                            <Link to={`/update-post/${_id}`}>
+                                <Button variant="contained" startIcon={<EditIcon/>}>Edit</Button>
+                            </Link>
+                            <Button onClick={() => handleDelete(post)} variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
                         </Stack>
                     </CardContent>
                 </Card>

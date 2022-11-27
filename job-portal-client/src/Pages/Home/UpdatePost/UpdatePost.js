@@ -5,15 +5,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
+import { useLoaderData } from "react-router-dom";
 
-const CreatePost = () => {
+const UpdatePost = () => {
   const classes = useStyles();
-  const [createdPost, setCreatedPost] = useState({});
+  const [updatedPost, setUpdatedPost] = useState({});
+  const loadPost = useLoaderData();
 
-  const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +26,7 @@ const CreatePost = () => {
     const jobBenefits = e.target.jobBenefits.value;
     const howToApply = e.target.howToApply.value;
 
-    const createdPost = {
+    const updatedPost = {
       postName,
       companyName,
       numberOfVacancy,
@@ -39,25 +37,24 @@ const CreatePost = () => {
       jobBenefits,
       howToApply,
     };
-    setCreatedPost(createdPost);
-    console.log(createdPost);
 
-    fetch("http://localhost:5000/createPost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(createdPost),
+    setUpdatedPost(updatedPost);
+    console.log(updatedPost);
+
+    fetch(`http://localhost:5000/updatePost/${loadPost._id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedPost),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          alert("Post Created Successfully!");
-        }
-      });
-
-    e.target.reset();
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if (data.acknowledged) {
+                alert("Post Updated Successfully!");
+            }
+        });
   };
 
   return (
@@ -65,7 +62,7 @@ const CreatePost = () => {
       <div className={classes.MakePost}>
         <Card className={classes.MakePostCard}>
           <Typography mb={5} variant="h3" align="center" gutterBottom>
-            Create Job Post
+            Update Job Post
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
@@ -75,6 +72,7 @@ const CreatePost = () => {
                   id="postName"
                   name="postName"
                   label="Post name"
+                  defaultValue={loadPost.postName}
                   fullWidth
                   autoComplete="given-name"
                 />
@@ -85,6 +83,7 @@ const CreatePost = () => {
                   id="companyName"
                   name="companyName"
                   label="Company name"
+                  defaultValue={loadPost.companyName}
                   fullWidth
                   autoComplete="given-name"
                 />
@@ -95,6 +94,7 @@ const CreatePost = () => {
                   id="numberOfVacancy"
                   name="numberOfVacancy"
                   label="Number of vacancy"
+                  defaultValue={loadPost.numberOfVacancy}
                   fullWidth
                   autoComplete="given-name"
                 />
@@ -107,10 +107,9 @@ const CreatePost = () => {
                   label="Post Created Date"
                   fullWidth
                   autoComplete="given-name"
-                  value={date}
-                  InputProps={{
-                    readOnly: true,
-                  }}
+                  type="date"
+                  defaultValue={loadPost.currentDate}
+                  InputLabelProps={{ shrink: true }}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -122,6 +121,7 @@ const CreatePost = () => {
                   fullWidth
                   autoComplete="given-name"
                   type="date"
+                  defaultValue={loadPost.lastApplyDate}
                   InputLabelProps={{ shrink: true }}
                 />
               </Grid>
@@ -131,6 +131,7 @@ const CreatePost = () => {
                   id="standard-multiline-static"
                   name="jobDescription"
                   label="Job Description"
+                  defaultValue={loadPost.jobDescription}
                   multiline
                   rows={4}
                   fullWidth
@@ -141,6 +142,7 @@ const CreatePost = () => {
                   required
                   id="standard-multiline-static"
                   label="Job Requirements"
+                  defaultValue={loadPost.jobRequirements}
                   name="jobRequirements"
                   multiline
                   rows={4}
@@ -153,6 +155,7 @@ const CreatePost = () => {
                   id="standard-multiline-static"
                   label="Job Benefits"
                   name="jobBenefits"
+                  defaultValue={loadPost.jobBenefits}
                   multiline
                   rows={4}
                   fullWidth
@@ -164,6 +167,7 @@ const CreatePost = () => {
                   id="standard-multiline-static"
                   label="How to Apply"
                   name="howToApply"
+                  defaultValue={loadPost.howToApply}
                   multiline
                   rows={4}
                   fullWidth
@@ -177,7 +181,7 @@ const CreatePost = () => {
                   align="center"
                   color="primary"
                 >
-                  Create Post
+                  Update Post
                 </Button>
               </Grid>
             </Grid>
@@ -188,4 +192,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default UpdatePost;

@@ -84,6 +84,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         marginTop: "20px",
+        "& a": {
+            color: "white",
+            textDecoration: "none",
+        },
     },
     homeImg: {
         width: "40%",
