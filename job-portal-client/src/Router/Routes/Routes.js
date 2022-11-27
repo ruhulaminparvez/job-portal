@@ -7,6 +7,7 @@ import Error from './../../Pages/Error/Error';
 import CreatePost from './../../Pages/Home/CreatePost/CreatePost';
 import ViewPost from './../../Pages/Home/ViewPost/ViewPost';
 import UpdatePost from "../../Pages/Home/UpdatePost/UpdatePost";
+import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 
 
 const router = createBrowserRouter([
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <PrivateRoute><Home /></PrivateRoute>
             },
             {
                 path: "/login",
@@ -28,15 +29,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/create-post",
-                element: <CreatePost />
+                element: <PrivateRoute><CreatePost /></PrivateRoute>
             },
             {
                 path: "/view-post",
-                element: <ViewPost />
+                element: <PrivateRoute><ViewPost /></PrivateRoute>
             },
             {
                 path: "/update-post/:id",
-                element: <UpdatePost />,
+                element: <PrivateRoute><UpdatePost /></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/post/${params.id}`)
             },
             {
