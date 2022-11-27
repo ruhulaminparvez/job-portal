@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     },
     MakePost: {
         padding: "40px",
+    },
+    MakePostCard: {
+        padding: "50px",
     }
 }));
 

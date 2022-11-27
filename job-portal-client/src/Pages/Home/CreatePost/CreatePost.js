@@ -2,114 +2,134 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import { Card } from "@mui/material";
 import useStyles from "../../../Styles/Styles";
+
 
 const CreatePost = () => {
   const classes = useStyles();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const postName = e.target.postName.value;
+    const companyName = e.target.companyName.value;
+    const numberOfVacancy = e.target.numberOfVacancy.value;
+    const jobDescription = e.target.jobDescription.value;
+    const jobRequirements = e.target.jobRequirements.value;
+    const jobBenefits = e.target.jobBenefits.value;
+    const howToApply = e.target.howToApply.value;
+
+    const post = {
+      postName,
+      companyName,
+      numberOfVacancy,
+      jobDescription,
+      jobRequirements,
+      jobBenefits,
+      howToApply
+    }
+
+    console.log(post);
+
+    e.target.reset();
+  };
+
   return (
     <React.Fragment>
       <div className={classes.MakePost}>
-        <Typography variant="h6" gutterBottom>
-          Shipping address
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="firstName"
-              name="firstName"
-              label="First name"
-              fullWidth
-              autoComplete="given-name"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="lastName"
-              name="lastName"
-              label="Last name"
-              fullWidth
-              autoComplete="family-name"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="address1"
-              name="address1"
-              label="Address line 1"
-              fullWidth
-              autoComplete="shipping address-line1"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="address2"
-              name="address2"
-              label="Address line 2"
-              fullWidth
-              autoComplete="shipping address-line2"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="city"
-              name="city"
-              label="City"
-              fullWidth
-              autoComplete="shipping address-level2"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="state"
-              name="state"
-              label="State/Province/Region"
-              fullWidth
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
-              fullWidth
-              autoComplete="shipping postal-code"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="country"
-              name="country"
-              label="Country"
-              fullWidth
-              autoComplete="shipping country"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
-              label="Use this address for payment details"
-            />
-          </Grid>
-        </Grid>
-      </div>
+        <Card className={classes.MakePostCard}>
+          <Typography mb={5} variant="h6" align="center" gutterBottom>
+            Create Job Post
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="postName"
+                  name="postName"
+                  label="Post name"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="companyName"
+                  name="companyName"
+                  label="Company name"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="numberOfVacancy"
+                  name="numberOfVacancy"
+                  label="Number of vacancy"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="standard-multiline-static"
+                  name="jobDescription"
+                  label="Job Description"
+                  multiline
+                  rows={4}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                required
+                id="standard-multiline-static"
+                label="Job Requirements"
+                name="jobRequirements"
+                multiline
+                rows={4}
+                fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                required
+                id="standard-multiline-static"
+                label="Job Benefits"
+                name="jobBenefits"
+                multiline
+                rows={4}
+                fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                required
+                id="standard-multiline-static"
+                label="How to Apply"
+                name="howToApply"
+                multiline
+                rows={4}
+                fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={12} align="center">
+                <Button type="submit" variant="contained" align="center" color="primary">
+                  Create Post
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Card>
+                
+  </div>
     </React.Fragment>
   );
 };

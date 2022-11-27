@@ -19,6 +19,8 @@ const Header = () => {
     logOutUser().then(() => {
       console.log("User Log Out");
       alert("User Log Out");
+      // redirect to login page
+      
     });
   };
 
