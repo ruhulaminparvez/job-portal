@@ -9,7 +9,7 @@ import { AuthContext } from './../../../contexts/AuthProvider';
 const ViewPost = () => {
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
-    const {user, logOut } = useContext(AuthContext);
+    const {user, logOutUser } = useContext(AuthContext);
 
     useEffect(() => {
         fetch('https://job-portal-weld.vercel.app/posts', {
@@ -17,9 +17,14 @@ const ViewPost = () => {
                 authorization: `Bearer ${localStorage.getItem('job-token')}`
             }
         })
-            .then(res =>  res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOutUser();
+                }
+                return res.json();
+            })
             .then(data => setPosts(data))
-    }, [user?.email, logOut]);
+    }, [user?.email, logOutUser]);
 
     return (
         <div className={classes.viewPost}>
@@ -33,7 +38,7 @@ const ViewPost = () => {
             </Grid>
             <Grid container spacing={2}>
                {
-                  posts && posts.map(post => <ViewPostCard key={post._id} post={post}></ViewPostCard>)
+                 posts && posts.length > 0 && posts.map(post => <ViewPostCard post={post} key={post._id} />)
                }
             </Grid>
             

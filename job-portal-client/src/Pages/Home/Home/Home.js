@@ -5,6 +5,7 @@ import useStyles from "../../../Styles/Styles";
 
 const Home = () => {
     const classes = useStyles();
+    
     return (
         <div>
             <div className={classes.homeDiv}>
